@@ -14,7 +14,9 @@ In order to execute these scripts, you will need sysop priviledges and set `sudo
 
 the MariaDB username is MW_Admin
 
-echo "gutting default wiki content"
+Gutting default wiki tables
+
+login into mariadb: mysql -u root -p
 select your database via `use DATABASENAME;`
 
 TRUNCATE TABLE page;
