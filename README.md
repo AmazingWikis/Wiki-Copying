@@ -12,8 +12,29 @@ Once the fork is completed, perform the announcement immediately or after Google
 
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
 
+the MariaDB username is MW_Admin
+
+echo "gutting default wiki content"
+select your database via `use DATABASENAME;`
+
+TRUNCATE TABLE page;
+TRUNCATE TABLE revision;
+TRUNCATE TABLE revision_actor_temp;
+TRUNCATE TABLE revision_comment_temp;
+TRUNCATE TABLE ip_changes;
+TRUNCATE TABLE content;
+TRUNCATE TABLE user;
+TRUNCATE TABLE actor;
+TRUNCATE TABLE logging;
+TRUNCATE TABLE log_search;
+TRUNCATE TABLE image;
+TRUNCATE TABLE oldimage;
+TRUNCATE TABLE filearchive;
+TRUNCATE TABLE imagelinks;
+
 General Forking Information
 - Purchase a domain, best stable price is $12 at google domains that includes domain privacy and locking
+- Configure networking A records, link your domain to the server IP address. This is required for creating a wiki.
 - mysql/mariadb config settings
 *- set storage engine to `InnoDB`
 *- disable binary logs to save storage space
