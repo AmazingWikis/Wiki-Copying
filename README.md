@@ -6,14 +6,13 @@ Once the fork is completed, perform the announcement immediately or after Google
 
 3 bash scripts have been prepared to allow smooth forking
 * quick install mediawiki 1.37.6 and get a wiki up
+* create the required Apache conf file using "sample.conf" as a guide
+* Add the ".htaccess" file to "/var/www/html" directory
 * cloning a remote wiki
 * create a database dump
 * create an image dump
 
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
-
-create the required Apache conf file using "sample.conf" as a guide
-Add the ".htaccess" file to "/var/www/html" directory
 
 the MariaDB username is MW_Admin
 
