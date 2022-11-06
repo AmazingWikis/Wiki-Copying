@@ -71,6 +71,9 @@ sudo chown -R www-data:www-data /var/www/html/*
 sudo chmod 755 -R /var/www/html/w/*
 sudo rm /tmp/mediawiki-1.37.6.tar.gz
 
+cp /var/www/html/w/composer.json /root/composer.json
+composer update --no-dev
+cp /root/composer.lock /var/www/html/w
 
 echo "What is the language of the remote wiki?"
 read lang
