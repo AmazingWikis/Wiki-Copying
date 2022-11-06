@@ -12,47 +12,9 @@ Once the fork is completed, perform the announcement immediately or after Google
 
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
 
-create the required Apache conf file
-<VirtualHost *:80>
-ServerName YOUR_SUBDOMAIN
-
-ServerAdmin
-DocumentRoot /var/www/html
-RewriteEngine On
-RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/w/ [L]
-RewriteRule ^/?$ %{DOCUMENT_ROOT}/w/ [L]
-
-<Directory /var/www/html/>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-</Directory>
-RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
-
-</VirtualHost>
-
+create the required Apache conf file using "sample.conf" as a guide
 
 the MariaDB username is MW_Admin
-
-Gutting default wiki tables
-
-login into mariadb: mysql -u root -p
-select your database via `use DATABASENAME;`
-
-TRUNCATE TABLE page;
-TRUNCATE TABLE revision;
-TRUNCATE TABLE revision_actor_temp;
-TRUNCATE TABLE revision_comment_temp;
-TRUNCATE TABLE ip_changes;
-TRUNCATE TABLE content;
-TRUNCATE TABLE user;
-TRUNCATE TABLE actor;
-TRUNCATE TABLE logging;
-TRUNCATE TABLE log_search;
-TRUNCATE TABLE image;
-TRUNCATE TABLE oldimage;
-TRUNCATE TABLE filearchive;
-TRUNCATE TABLE imagelinks;
 
 General Forking Information
 - Purchase a domain, best stable price is $12 at google domains that includes domain privacy and locking
