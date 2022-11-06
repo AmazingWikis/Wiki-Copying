@@ -12,6 +12,26 @@ Once the fork is completed, perform the announcement immediately or after Google
 
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
 
+create the required Apache conf file
+<VirtualHost *:80>
+ServerName YOUR_SUBDOMAIN
+
+ServerAdmin
+DocumentRoot /var/www/html
+RewriteEngine On
+RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/w/ [L]
+RewriteRule ^/?$ %{DOCUMENT_ROOT}/w/ [L]
+
+<Directory /var/www/html/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+
+</VirtualHost>
+
+
 the MariaDB username is MW_Admin
 
 Gutting default wiki tables

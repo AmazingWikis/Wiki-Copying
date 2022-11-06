@@ -13,13 +13,22 @@ sudo apt install -y apache2 apache2-utils
 sudo apt-get autoremove -y
 a2enmod headers
 sudo a2enmod rewrite
+
+
+echo "what is full subdomain and domain name?"
+read subdomain
+
+sudo nano /etc/apache2/sites-available/$subdomain.conf
+
+sudo a2dissite 000-default.conf
+sudo a2ensite $subdomain.conf
 sudo systemctl restart apache2
 
 
 echo "installing php"
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-sudo apt install -y php7.4.3 php7.4.3-cli php7.4.3-common
+sudo apt install -y php7.4.3 php7.4.3-cli php7.4.3-common php-cli unzip
 sudo apt-get install -y php-mysql php-apcu php-memcached php-curl php-xml php-mbstring php-intl p7zip-full p7zip-rar
 sudo phpenmod mbstring
 sudo phpenmod xml
@@ -27,7 +36,10 @@ sudo phpenmod intl
 php -v
 
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php --install-dir=/usr/bin --filename=composer-setup
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+HASH=`curl -sS https://composer.github.io/installer.sig`
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 echo 'installing mariadb server'
 sudo apt-get install -y software-properties-common dirmngr apt-transport-https
@@ -35,7 +47,6 @@ sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.a
 sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el,s390x] https://mirror.its.dal.ca/mariadb/repo/10.6/ubuntu focal main'
 sudo apt install -y mariadb-server-10.6 mariadb-client-10.6
 mariadb -V
-sudo systemctl enable mariadb
 sudo systemctl status mariadb
 sudo apt-get autoremove -y
 sudo apt-get autoclean
@@ -47,18 +58,14 @@ read database_name
 
 mysql -u root -e "CREATE DATABASE $database_name;"
 
-echo "What is server IP?"
-read IP
-
 echo "password for MW_Admin"
 read pass1
 
 mysql -u root -e "CREATE USER 'MW_Admin'@'localhost' IDENTIFIED BY '$pass1';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'MW_Admin'@'localhost' WITH GRANT OPTION;"
-mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'MW_Admin'@'$IP' IDENTIFIED BY '$pass1';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'MW_Admin'@'127.0.0.1' IDENTIFIED BY '$pass1';"
 
 mysql -u root -e "FLUSH PRIVILEGES;"
-
 
 echo 'setting up wiki files'
 sudo chown -R www-data:www-data /var/www/html/*
@@ -74,23 +81,39 @@ sudo chmod 755 -R /var/www/html/w/*
 sudo rm /tmp/mediawiki-1.37.6.tar.gz
 
 cp /var/www/html/w/composer.json /root/composer.json
-composer update --no-dev
-cp /root/composer.lock /var/www/html/w
+cd /root
+php /usr/local/bin/composer update --no-dev
+cp /root/composer.lock /var/www/html/w/composer.lock
 
 echo "What is the language of the remote wiki?"
 read lang
 
-php /var/www/html/w/maintenance/install.php --dbname="$database_name" --dbserver="localhost" --installdbuser="MW_Admin" --installdbpass="$pass1" --dbuser="MW_Admin" --dbpass="$pass1" --server="$IP" --scriptpath=/wiki --lang="$lang" --pass="hf50lp2wM79E0fjois" "Temp Wiki" "Admin"
+php /var/www/html/w/maintenance/install.php --dbname="$database_name" --dbserver="127.0.0.1" --installdbuser="MW_Admin" --installdbpass="$pass1" --dbuser="MW_Admin" --dbpass="$pass1" --server="$subdomain" --scriptpath=/wiki --lang="$lang" --pass="hf50lp2wM79E0fjois" "Temp Wiki" "Admin"
 
 
-php /var/www/html/wiki/maintenance/update.php --quick --force
+php /var/www/html/w/maintenance/update.php --quick --force
+
+mysql -u root -e "USE $database_name; TRUNCATE TABLE page;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE revision;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE revision_actor_temp;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE revision_comment_temp;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE ip_changes;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE content;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE user;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE actor;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE logging;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE log_search;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE image;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE oldimage;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE filearchive;"
+mysql -u root -e "USE $database_name; TRUNCATE TABLE imagelinks;"
+
 
 echo 'setting up firewall'
 sudo ufw allow 'Apache Full'
 sudo ufw allow 'Apache Secure'
-sudo ufw allow https
-sudo ufw allow any port 3306
-sudo ufw allow any port mysql
+sudo ufw allow 'mysql'
+sudo ufw allow 'ssh'
 
 sudo systemctl enable apache2
 sudo systemctl enable mariadb
