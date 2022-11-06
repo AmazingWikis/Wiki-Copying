@@ -13,6 +13,7 @@ Once the fork is completed, perform the announcement immediately or after Google
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
 
 create the required Apache conf file using "sample.conf" as a guide
+Add the ".htaccess" file to "/var/www/html" directory
 
 the MariaDB username is MW_Admin
 
