@@ -37,6 +37,13 @@ TRUNCATE TABLE imagelinks;
 General Forking Information
 - Purchase a domain, best stable price is $12 at google domains that includes domain privacy and locking
 - Configure networking A records, link your domain to the server IP address. This is required for creating a wiki.
+at your VPS host provider's dashboard, locate the Networking tab and choose "Domains"
+- enter your domain
+- click on your domain then create an A record
+*- set HOSTNAME to subdomain
+*- choose your VPS server
+click "Create Record"
+
 - mysql/mariadb config settings
 *- set storage engine to `InnoDB`
 *- disable binary logs to save storage space
