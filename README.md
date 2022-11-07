@@ -1,6 +1,6 @@
 NOT SUITABLE FOR DEPLOYMENT USAGE! ALL SOFTWARE INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
 
-All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These scripts will be updated as necessary.
+All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These should work at any VPS provider. These scripts will be updated as necessary.
 
 Once the fork is completed, perform the announcement immediately or after Google Indexed stuff
 
