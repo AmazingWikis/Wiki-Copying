@@ -1,3 +1,5 @@
+NOT SUITABLE FOR DEPLOYMENT USAGE! ALL SOFTWARE INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
+
 All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These scripts will be updated as necessary.
 
 Once the fork is completed, perform the announcement immediately or after Google Indexed stuff
@@ -19,8 +21,8 @@ the MariaDB username is MW_Admin
 General Forking Information
 - Purchase a domain, best stable price is $12 at google domains that includes domain privacy and locking
 - Configure networking A records, link your domain to the server IP address. This is required for creating a wiki.
-at your VPS host provider's dashboard, locate the Networking tab and choose "Domains"
-- enter your domain
+- at your VPS host provider's dashboard, locate the Networking tab and choose "Domains"
+*- enter your domain
 - click on your domain then create an A record
 *- set HOSTNAME to subdomain
 *- choose your VPS server
@@ -37,9 +39,7 @@ default_storage_engine	= InnoDB
 #log_bin                = /var/log/mysql/mysql-bin.log
 #max_binlog_size        = 100M
 
-- prepare a mediawiki installation and install into a new database
-*- Truncate all of the following database tables: page, revision, revision_actor_temp, revision_comment_temp, ip_changes, slots, content, text, user, actor, logging, log_search
--* after setting up a wiki and configuring namespaces, configure $wgExtraNamespaces and $wgContentNamespaces in LocalSettings.php, Refer to php /grabbers/grabNamespaceInfo.php
+- Configure $wgExtraNamespaces and $wgContentNamespaces in LocalSettings.php, Refer to php /grabbers/grabNamespaceInfo.php
 
 - Download the Grabber scripts
 *- replace user.php and grabLogs.php files with the following
