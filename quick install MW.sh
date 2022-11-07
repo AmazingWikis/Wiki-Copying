@@ -14,13 +14,17 @@ sudo apt-get autoremove -y
 a2enmod headers
 sudo a2enmod rewrite
 
+echo "what is full domain name?"
+read domain
+sudo nano /etc/apache2/sites-available/$domain.conf
 
-echo "what is full subdomain and domain name?"
+echo "what is full subdomain name?"
 read subdomain
 
 sudo nano /etc/apache2/sites-available/$subdomain.conf
 
 sudo a2dissite 000-default.conf
+sudo a2ensite $domain.conf
 sudo a2ensite $subdomain.conf
 sudo systemctl restart apache2
 
