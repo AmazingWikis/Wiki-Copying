@@ -45,23 +45,6 @@ default_storage_engine	= InnoDB
 *- replace user.php and grabLogs.php files with the following
 
 
-Forking Guide - ShoutWiki
-- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
-- Request the wiki be removed
-
-
-Forking Guide - Miraheze 
-- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
-- Recovery of extension data where the database table does not contain sensitive personal information can be provided on request as a sql dump.
-*- import this sql data into the wiki database AFTER you have created a clone of the remote target wiki
-- Request the wiki be removed
-
-
-Forking Guide - Grabber Sripts [Fandom/Gamepedia, Miraheze, ShoutWiki]
-- Prepare a bot account: either use an existing bot account OR create a new account and gain community approval for a bot flag
-- Grant the bot account sysop/admin user-group
-
-
 create a copy of the remote target wiki
 - run grabNamespaceInfo.php	
 *- update LocalSettings.php with custom namespace
@@ -79,7 +62,26 @@ if there has been a delay between grabbing a copy of the remote wiki and communi
 For remote user authentication, install and configure Extension:MediaWikiAuth
 - it would be wise to disable copying over watch lists as that could delay the user authentication process
 - DO NOT USE grabber's populateUserTable.php, instead use MediaWikiAuth's populateUserTable.php
-https://zeldapedia.wiki/wiki/Guidelines:Account_Migration
+- See additional account migration steps at https://zeldapedia.wiki/wiki/Guidelines:Account_Migration
+
+
+REFORMAT BELOW AS WIKI
+
+Forking Guide - ShoutWiki
+- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
+- Request the wiki be removed
+
+
+Forking Guide - Miraheze 
+- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
+- Recovery of extension data where the database table does not contain sensitive personal information can be provided on request as a sql dump.
+*- import this sql data into the wiki database AFTER you have created a clone of the remote target wiki
+- Request the wiki be removed
+
+
+Forking Guide - Grabber Sripts [Fandom/Gamepedia, Miraheze, ShoutWiki]
+- Prepare a bot account: either use an existing bot account OR create a new account and gain community approval for a bot flag
+- Grant the bot account sysop/admin user-group
 
 
 NOTES for Fandom/Gamepedia
@@ -88,3 +90,12 @@ NOTES for Fandom/Gamepedia
 * if you perform a surprise fork announcement, will result in immediate demotion
 * all interwiki and links to NIWA or SEIWA networks will be purged
 * extension data is not recoverable and Fandom/Gamepedia will not provide this table data in .sql format
+
+
+Best Practices
+separate critical components to isolated servers
+
+FAQ
+Do not remote clone a wiki with an active community with the intent to compete, the purpose of providing these shell scripts and instructions is to assist wiki communities who wish to leave but lack the technical skills to move.
+
+These Shell Scripts are designed to automated as much of the process, however requires user input and manual configurations. This means that basic technical skills are required, which includes purchase of a domain and configure networking of the domain's [A, Custom Name Server, CAA  aka SSL Certificates records].
