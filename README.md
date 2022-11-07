@@ -1,4 +1,4 @@
-NOT SUITABLE FOR DEPLOYMENT USAGE! ALL SOFTWARE INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
+NOT SUITABLE FOR DEPLOYMENT USAGE! ALL SOFTWARE IS INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
 
 All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These should work at any VPS provider. These scripts will be updated as necessary.
 
@@ -96,6 +96,9 @@ Best Practices
 separate critical components to isolated servers
 
 FAQ
+Is the included quick MediaWiki script recommended for production environment?
+No, having all of the software and both the web and database servers installed all one on server is poor practices subject to data loss. This is meant to quickly move a wiki from another platform that refuses to provide image and database dumps.
+
 Do not remote clone a wiki with an active community with the intent to compete, the purpose of providing these shell scripts and instructions is to assist wiki communities who wish to leave but lack the technical skills to move.
 
 These Shell Scripts are designed to automated as much of the process, however requires user input and manual configurations. This means that basic technical skills are required, which includes purchase of a domain and configure networking of the domain's [A, Custom Name Server, CAA  aka SSL Certificates records].
