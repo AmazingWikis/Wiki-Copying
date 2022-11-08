@@ -124,16 +124,19 @@ mysql -u root -e "USE $database_name; TRUNCATE TABLE imagelinks;"
 
 
 echo 'setting up firewall'
-sudo ufw allow 'Apache Full'
-sudo ufw allow 'Apache Secure'
-sudo ufw allow 'mysql'
-sudo ufw allow 'ssh'
+sudo ufw allow 'Apache'
+sudo ufw allow 22
+sudo ufw allow http
 
 sudo systemctl enable apache2
 sudo systemctl enable mariadb
-sudo systemctl enable ufw
 sudo ufw enable
 sudo ufw reload
 sudo systemctl restart apache2
 systemctl daemon-reload
 sudo systemctl reboot
+
+
+#sudo ufw allow https
+#sudo ufw allow 'Apache Full'
+#sudo ufw allow 'Apache Secure'
