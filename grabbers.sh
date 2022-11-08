@@ -49,7 +49,6 @@ if ![ -z "${customNamespaces}" ] {
 
 php /var/www/html/w/grabbers/grabLogs.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" --url="$URL"  --namespaces="$namespaces"
 php /var/www/html/w/grabbers/grabText.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser"  --url="$URL"  --namespaces="$namespaces"
-php /var/www/html/w/grabbers/grabFiles.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" --url="$URL" 
 php /var/www/html/w/grabbers/grabProtectedTitles.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" ---url="$URL" 
 php /var/www/html/w/grabbers/grabUserBlocks.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" --url="$URL" 
 php /var/www/html/w/grabbers/grabUserGroups.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" --url="$URL" 
@@ -62,23 +61,29 @@ read botpassword
 
 # botpassword required [bot, sysop]
 php /var/www/html/w/grabbers/grabDeletedText.php --dbpass="$dbPass"  --dbuser="$dbUser" --url="$URL" --namespaces="$namespaces" --username="$username" --password="$botpassword"
-php /var/www/html/w/grabbers/grabDeletedFiles.php --db="$dbName" --dbpass="$dbPass"  --dbuser="$dbUser" --url="$URL" --username="$username" --password="$botpassword"
+
 
 php /var/www/html/w/maintenance/checkBadRedirects.php --conf /var/www/html/w/LocalSettings.php
-
 php /var/www/html/w/maintenance/updateRestrictions.php 
 php /var/www/html/w/maintenance/populateCategory.php --force
 php /var/www/html/w/maintenance/rebuildrecentchanges.php
 php /var/www/html/w/maintenance/rebuildtextindex.php 
 php /var/www/html/w/maintenance/refreshLinks.php 
-php /var/www/html/w/maintenance/update.php --quick --force
 php /var/www/html/w/maintenance/updateArticleCount.php --update
+php /var/www/html/w/maintenance/updateSpecialPages.php
 php /var/www/html/w/maintenance/initSiteStats.php --update
+php /var/www/html/w/maintenance/update.php --quick --force
 php /var/www/html/w/maintenance/runJobs.php
 php /var/www/html/w/maintenance/runJobs.php
 php /var/www/html/w/maintenance/runJobs.php
 php /var/www/html/w/maintenance/runJobs.php
+
+
+
+# botpassword required [bot, sysop]
+php /var/www/html/w/grabbers/grabFiles.php --db="$dbName" --dbpass="$dbPass" --dbuser="$dbUser" --url="$URL" 
+php /var/www/html/w/grabbers/grabDeletedFiles.php --db="$dbName" --dbpass="$dbPass"  --dbuser="$dbUser" --url="$URL" --username="$username" --password="$botpassword"
 php /var/www/html/w/maintenance/rebuildImages.php
 php /var/www/html/w/maintenance/refreshFileHeaders.php
-php /var/www/html/w/maintenance/updateSpecialPages.php
+php /var/www/html/w/maintenance/update.php --quick --force
 

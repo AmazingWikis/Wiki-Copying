@@ -12,7 +12,7 @@ Once the fork is completed, perform the announcement immediately or after Google
 * Add the ".htaccess" file to "/var/www/html" directory
 * cloning a remote wiki
 * create a database dump
-* create an image dump
+* create an image dump - best to grab files on the production environment as moving files tends to cause thumbnail issues
 
 In order to execute these scripts, you will need sysop priviledges and set `sudo chmod +x /path/to/script`
 
