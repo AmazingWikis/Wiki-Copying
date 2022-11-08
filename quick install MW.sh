@@ -28,6 +28,16 @@ sudo a2ensite $domain.conf
 sudo a2ensite $subdomain.conf
 sudo systemctl restart apache2
 
+echo 'installing lets encrypt'
+sudo apt-get update -y
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository universe
+sudo apt install -y certbot python3-certbot-apache
+
+sudo certbot --apache
+systemctl reload apache2
+sudo systemctl restart apache2
+
 
 echo "installing php"
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
