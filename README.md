@@ -1,4 +1,4 @@
-NOT SUITABLE FOR DEPLOYMENT USAGE! ALL SOFTWARE IS INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
+NOT SUITABLE FOR DEPLOYMENT USAGE, USE ONLY TO CLONE! ALL SOFTWARE IS INSTALLED ON ONE SERVER IS SUBJECT TO DATA LOSS.
 
 All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These should work at any VPS provider. These scripts will be updated as necessary.
 
@@ -63,42 +63,3 @@ For remote user authentication, install and configure Extension:MediaWikiAuth
 - it would be wise to disable copying over watch lists as that could delay the user authentication process
 - DO NOT USE grabber's populateUserTable.php, instead use MediaWikiAuth's populateUserTable.php
 - See additional account migration steps at https://zeldapedia.wiki/wiki/Guidelines:Account_Migration
-
-
-REFORMAT BELOW AS WIKI
-
-Forking Guide - ShoutWiki
-- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
-- Request the wiki be removed
-
-
-Forking Guide - Miraheze 
-- Submit a request for XML database and image dumps OR use Grabber scripts [requires sysop/admin + bot flag]
-- Recovery of extension data where the database table does not contain sensitive personal information can be provided on request as a sql dump.
-*- import this sql data into the wiki database AFTER you have created a clone of the remote target wiki
-- Request the wiki be removed
-
-
-Forking Guide - Grabber Sripts [Fandom/Gamepedia, Miraheze, ShoutWiki]
-- Prepare a bot account: either use an existing bot account OR create a new account and gain community approval for a bot flag
-- Grant the bot account sysop/admin user-group
-
-
-NOTES for Fandom/Gamepedia
-* If your wiki is assigned a Wiki Representative [paid employee], do not inform them of your intent to fork or threaten to fork. They are obligated to inform their supervisor
-* if a prior fork threat is made, the instant you announce will result in immediate demotion
-* if you perform a surprise fork announcement, will result in immediate demotion
-* all interwiki and links to NIWA or SEIWA networks will be purged
-* extension data is not recoverable and Fandom/Gamepedia will not provide this table data in .sql format
-
-
-Best Practices
-separate critical components to isolated servers
-
-FAQ
-Is the included quick MediaWiki script recommended for production environment?
-No, having all of the software and both the web and database servers installed all one on server is poor practices subject to data loss. This is meant to quickly move a wiki from another platform that refuses to provide image and database dumps.
-
-Do not remote clone a wiki with an active community with the intent to compete, the purpose of providing these shell scripts and instructions is to assist wiki communities who wish to leave but lack the technical skills to move.
-
-These Shell Scripts are designed to automated as much of the process, however requires user input and manual configurations. This means that basic technical skills are required, which includes purchase of a domain and configure networking of the domain's [A, Custom Name Server, CAA  aka SSL Certificates records].
