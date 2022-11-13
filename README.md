@@ -2,9 +2,9 @@ NOT SUITABLE FOR DEPLOYMENT USAGE, USE ONLY TO CLONE! ALL SOFTWARE IS INSTALLED 
 
 All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6. These should work at any VPS provider. These scripts will be updated as necessary.
 
-Once the fork is completed, perform the announcement immediately or after Google Indexed stuff
+These Shell Scripts are designed to automated as much of the process, however requires user input and manual configurations. This means that basic technical skills are required, which includes purchase of a domain and configure networking of the domain's [A, Custom Name Server, CAA  aka SSL Certificates records].
 
-* figure out how to use botpasswords or user credentials for grabDeletedText.php, grabDeletedFiles.php
+Once the fork is completed, perform the announcement immediately or after Google Indexes stuff
 
 3 bash scripts have been prepared to allow smooth forking
 * quick install mediawiki 1.37.6 and get a wiki up
