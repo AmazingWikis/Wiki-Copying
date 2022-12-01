@@ -4,6 +4,8 @@ All bash scripts provided have been tested on Ubuntu 20.04 for mediawiki 1.37.6.
 
 These Shell Scripts are designed to automate as much of the process, however requires user input and manual configurations. This means that basic technical skills are required, which includes purchase of a domain and configure networking of the domain's [A, Custom Name Server, CAA  aka SSL Certificate records].
 
+You will need to configure a botpassword via Special:botpasswords at your current hosting platform.
+
 If there has been a delay between grabbing a copy of the remote wiki and community approval, use grabNewText.php to get updated content and grabNewFiles.php to get new files
 
 If any of the Grabber scripts fail, open a bug report at https://phabricator.wikimedia.org/tag/utilities-grabbers/
